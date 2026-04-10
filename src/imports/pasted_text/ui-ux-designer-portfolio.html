@@ -1,0 +1,160 @@
+Create a modern dark-themed personal portfolio website for a UI/UX Designer. 
+Use this exact visual system and animate every section.
+
+---
+
+## COLOR SYSTEM
+- Background: #0d0d0d (near black)
+- Surface/Card: #1a1a1a
+- Primary Accent: #00e676 (bright green)
+- Text Primary: #ffffff
+- Text Secondary: #888888
+- Nav background: #111111
+
+---
+
+## TYPOGRAPHY
+- Headings: Bold, 56–72px, white
+- Accent word (e.g. "Designer."): #00e676, same size
+- Body: 14–16px, #888888
+- Label/Overline: 11px uppercase letter-spacing 3px, #00e676
+
+---
+
+## SECTION 1 — HERO (Full viewport height)
+
+Layout: Two-column (50/50)
+Left column:
+- Overline label: "HELLO, I'M A" — small, green, uppercase
+- Heading: "UI & UX" (white) + "Designer." (green, italic)
+- Body text: short intro paragraph, gray
+- CTA Button: filled green, white text, rounded, "VIEW PORTFOLIO"
+- Below button: "Scroll Down to Explore" with animated down arrow
+
+Right column:
+- Circular green blob (#00e676, 60% opacity) as background shape
+- Person photo cutout placed center-right, overlapping blob
+- Decorative dots grid pattern (top-right corner, green/gray)
+- Small geometric shapes floating: triangle outline, hexagon outline, circle outline
+
+Background decorations:
+- Large hexagon wireframe outline (left side, dark green, very subtle)
+- Dotted grid (top-right)
+- Triangle outline (left edge)
+
+ANIMATIONS for Hero:
+- On page load: left column text fades in from left with stagger delay (name first, then subtitle, then body, then button) — ease-out 0.6s each, 100ms apart
+- Person photo: slides in from right, fade in, 0.8s ease-out
+- Green blob: scale from 0 to 1 with spring bounce, 1s delay
+- Floating shapes: continuous slow rotation (360deg, 8s infinite)
+- Dots pattern: fade in last, 1.2s
+- CTA Button hover: scale 1.05, green glow box-shadow
+
+---
+
+## SECTION 2 — ABOUT ME
+
+Layout: Two-column
+Left: circular photo with 3 floating stat badges
+- Photo: circular crop, person in suit
+- Badge 1 (top-right of photo): dark pill "16+ Years of Experience"
+- Badge 2 (left of photo): dark pill "215+ Projects Completed"  
+- Badge 3 (bottom-right): dark pill "97+ Happy Clients"
+- Thin green circular ring around the photo (dashed, animated rotating)
+
+Right:
+- Overline: "LET ME INTRODUCE MYSELF"
+- Heading: "About me" in green
+- Subheading: "A story of hardwork and perseverance." white bold
+- Body text paragraph, gray
+- Contact label + email in green
+- Two buttons: "HIRE ME" (green filled) + "DOWNLOAD CV" (dark outlined)
+
+ANIMATIONS:
+- Scroll-triggered: section fades in when 20% visible
+- Stat badges: count-up number animation (0 → 16, 0 → 215, 0 → 97), 1.5s duration
+- Circular dashed ring: continuous slow clockwise rotation (20s infinite)
+- Photo: slight scale-up on scroll enter (0.9 → 1.0)
+- Text blocks: stagger fade-in from right, 150ms apart
+
+---
+
+## SECTION 3 — SERVICES
+
+Layout: 3-column card grid
+Section label: "WHAT I WILL DO FOR YOU" (overline, green)
+Section title: "Services" (green, centered)
+
+Card 1 (green background, accent):
+- Icon: lightbulb outline
+- Project count label: "198 PROJECTS"
+- Title: "UI & UX Design"
+- Body: short description, 2 lines
+
+Card 2 (dark background):
+- Icon: layers/stack outline (green)
+- Project count: "55 PROJECTS"
+- Title: "Graphic Design"
+- Body: same pattern
+
+Card 3 (dark background):
+- Icon: monitor outline (green)
+- Project count: "112 PROJECTS"
+- Title: "Web Design"
+- Body: same pattern
+
+ANIMATIONS:
+- Cards: slide up from bottom on scroll, stagger 200ms apart
+- Card hover: lift up (translateY -8px), box-shadow green glow, 0.3s ease
+- Active card (Card 1): always has green fill, others toggle on hover
+- Icon: subtle pulse scale animation on card hover
+
+---
+
+## SECTION 4 — PORTFOLIO
+
+Header row:
+- Title: "Portfolio" (green)
+- Filter tabs: "All" | "UI & UX Design" | "Branding" | "Graphic Design" (pill tabs, active = green)
+- Arrow prev/next navigation (right side)
+
+Grid: 4-column masonry-style thumbnail grid
+- Each thumbnail: rounded corners, image fills card
+- Overlay on hover: dark gradient + project title + category tag
+
+ANIMATIONS:
+- Filter tab switch: cards fade-out and fade-in with layout transition (0.4s)
+- Thumbnail hover: overlay slides up from bottom, smooth 0.3s
+- Arrow buttons: slide left/right on click with smooth transition
+- Grid entrance: stagger reveal top-to-bottom, 80ms per card
+
+---
+
+## NAVIGATION (Sticky top)
+
+Layout: logo left | nav links center | social icons + CTA button right
+- Logo: "A" in green square box + "Alex" text
+- Links: Hello, About, Portfolio, Work, Blog, Contact
+- Active link: green underline
+- CTA: "LET'S TALK" — outlined green button, rounded
+- Background: transparent on top, blur backdrop on scroll
+
+ANIMATIONS:
+- On scroll: nav gets dark background + blur (backdrop-filter: blur 12px) smoothly
+- Link hover: green color fade + underline slide-in from left
+- CTA hover: fill green background, white text
+
+---
+
+## GLOBAL STYLES
+- Border radius on cards: 16px
+- All transitions: cubic-bezier(0.25, 0.46, 0.45, 0.94)
+- Scrollbar: thin, green thumb on dark track
+- Section padding: 100px vertical
+- Max width: 1280px, centered
+- All sections have subtle decorative hexagon/dot backgrounds at low opacity
+
+---
+
+## OUTPUT
+Build this as a fully responsive single-page HTML prototype in Figma Make with all animations active, interactive filter tabs, scroll-triggered reveals, and hover states on all interactive elements.
