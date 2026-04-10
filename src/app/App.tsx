@@ -4,6 +4,7 @@ import { PortfolioLayout } from "./layouts/PortfolioLayout";
 import { TemplateLayout } from "./layouts/TemplateLayout";
 import { HomePage } from "./pages/HomePage";
 import TemplatePage from "./pages/TemplatePage";
+import { Inforasi } from "./pages/blog/Inforasi";
 
 export default function App() {
   return (
@@ -26,6 +27,16 @@ export default function App() {
           element={
             <TemplateLayout>
               <TemplatePage />
+            </TemplateLayout>
+          }
+        />
+
+        {/* ── Blog ── */}
+        <Route
+          path="/blog"
+          element={
+            <TemplateLayout>
+              <Inforasi />
             </TemplateLayout>
           }
         />

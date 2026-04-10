@@ -1,8 +1,9 @@
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import Image from "../../assets/desta1.png"
+import { Hero as H } from "../config/site";
 
-const heroImg = "https://images.unsplash.com/photo-1760245773960-200dbe893696?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYW4lMjBkZXNpZ25lciUyMHBvcnRyYWl0JTIwZGFyayUyMGJhY2tncm91bmR8ZW58MXx8fHwxNzc0ODU1ODYzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
+const heroImg = Image;
 
 export function Hero() {
   return (
@@ -55,7 +56,7 @@ export function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            UI & UX{" "}
+            Web Developer &{" "}
             <span style={{ color: "var(--accent)", fontStyle: "italic", transition: "color 0.4s" }}>Designer.</span>
           </motion.h1>
           <motion.p
@@ -65,7 +66,7 @@ export function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Hi I'm Alex Wallace, a passionate UI/UX Designer based in the Philippines. Welcome to my portfolio world.
+            {H.detail}
           </motion.p>
           <motion.button
             className="px-8 py-3 rounded-full"
@@ -74,7 +75,7 @@ export function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             whileHover={{ scale: 1.05, boxShadow: "0 0 20px color-mix(in srgb, var(--accent) 40%, transparent)" }}
-          >VIEW PORTFOLIO</motion.button>
+          >lihat portofolio</motion.button>
           <motion.div
             className="flex items-center gap-2 mt-12"
             style={{ color: "var(--text2)", fontSize: 12, transition: "color 0.4s" }}
@@ -103,7 +104,12 @@ export function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <ImageWithFallback src={heroImg} alt="Alex Wallace" className="w-full h-full object-cover" />
+            <img
+                src={heroImg}
+                alt="Alex Wallace"
+                className="w-full h-full"
+                style={{ objectFit: "cover", objectPosition: "top center", imageRendering: "auto", display: "block" }}
+              />
           </motion.div>
         </div>
       </div>

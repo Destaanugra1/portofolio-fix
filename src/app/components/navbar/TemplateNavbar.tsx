@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Sun, Moon, Menu, X, ShoppingBag, Search } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { useTheme } from "./ThemeContext";
+import { useTheme } from "../ThemeContext";
+import { siteConfig } from "../../config/site";
 
 const navLinks = [
   { label: "All Templates", href: "/templates" },
@@ -25,7 +26,9 @@ export function TemplateNavbar() {
 
   useEffect(() => {
     document.body.style.overflow = sidebarOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [sidebarOpen]);
 
   const navBg = scrolled
@@ -48,14 +51,18 @@ export function TemplateNavbar() {
             scrolled && mode === "light"
               ? "0 2px 20px rgba(0,0,0,0.08)"
               : scrolled && mode === "dark"
-              ? "0 2px 20px rgba(0,0,0,0.4)"
-              : "none",
+                ? "0 2px 20px rgba(0,0,0,0.4)"
+                : "none",
           transition: "background 0.4s, box-shadow 0.4s",
         }}
       >
         <div className="max-w-[1280px] mx-auto flex items-center justify-between px-5 py-4">
           {/* Logo — klik balik ke portfolio */}
-          <Link to="/" className="flex items-center gap-2" style={{ textDecoration: "none" }}>
+          <Link
+            to="/"
+            className="flex items-center gap-2"
+            style={{ textDecoration: "none" }}
+          >
             <div
               className="w-9 h-9 rounded-lg flex items-center justify-center"
               style={{
@@ -66,7 +73,7 @@ export function TemplateNavbar() {
                 transition: "background 0.4s, color 0.4s",
               }}
             >
-              A
+              {siteConfig.initial}
             </div>
             <span
               style={{
@@ -76,7 +83,7 @@ export function TemplateNavbar() {
                 transition: "color 0.4s",
               }}
             >
-              Alex
+              {siteConfig.name}
             </span>
           </Link>
 
@@ -112,7 +119,8 @@ export function TemplateNavbar() {
             <button
               className="w-9 h-9 rounded-full flex items-center justify-center"
               style={{
-                border: "1px solid color-mix(in srgb, var(--text2) 30%, transparent)",
+                border:
+                  "1px solid color-mix(in srgb, var(--text2) 30%, transparent)",
                 color: "var(--text2)",
                 transition: "border-color 0.4s, color 0.4s",
               }}
@@ -234,17 +242,21 @@ export function TemplateNavbar() {
                     "1px solid color-mix(in srgb, var(--text2) 15%, transparent)",
                 }}
               >
-                <span style={{ color: "var(--text1)", fontWeight: 600 }}>Menu</span>
+                <span style={{ color: "var(--text1)", fontWeight: 600 }}>
+                  Menu
+                </span>
                 <button
                   onClick={() => setSidebarOpen(false)}
                   style={{
-                    width: 36, height: 36,
+                    width: 36,
+                    height: 36,
                     borderRadius: 8,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     color: "var(--text2)",
-                    background: "color-mix(in srgb, var(--text2) 10%, transparent)",
+                    background:
+                      "color-mix(in srgb, var(--text2) 10%, transparent)",
                     border: "none",
                     cursor: "pointer",
                   }}
@@ -255,13 +267,26 @@ export function TemplateNavbar() {
               </div>
 
               {/* Nav Links */}
-              <nav style={{ flex: 1, padding: "24px 0", display: "flex", flexDirection: "column", gap: 4 }}>
+              <nav
+                style={{
+                  flex: 1,
+                  padding: "24px 0",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 4,
+                }}
+              >
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.href}
                     initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 + 0.1, type: "spring", stiffness: 300, damping: 28 }}
+                    transition={{
+                      delay: i * 0.05 + 0.1,
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 28,
+                    }}
                   >
                     <Link
                       to={link.href}
@@ -277,7 +302,9 @@ export function TemplateNavbar() {
                         borderLeft: isActive(link.href)
                           ? "3px solid var(--accent)"
                           : "3px solid transparent",
-                        color: isActive(link.href) ? "var(--accent)" : "var(--text2)",
+                        color: isActive(link.href)
+                          ? "var(--accent)"
+                          : "var(--text2)",
                         fontWeight: isActive(link.href) ? 600 : 400,
                         fontSize: 15,
                         textDecoration: "none",

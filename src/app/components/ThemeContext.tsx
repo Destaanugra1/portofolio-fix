@@ -1,9 +1,9 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-type Mode = "dark" | "light";
+type Mode = "light" | "dark";
 
 const ThemeCtx = createContext<{ mode: Mode; toggle: () => void }>({
-  mode: "dark",
+  mode: "light",
   toggle: () => {},
 });
 
@@ -32,7 +32,7 @@ const lightVars: Record<string, string> = {
 };
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [mode, setMode] = useState<Mode>("dark");
+  const [mode, setMode] = useState<Mode>("light");
 
   useEffect(() => {
     const vars = mode === "dark" ? darkVars : lightVars;

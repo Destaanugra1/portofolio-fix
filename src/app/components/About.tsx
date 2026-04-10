@@ -1,6 +1,7 @@
 import { motion, useInView } from "motion/react";
 import { useRef, useEffect, useState } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { About as A } from "../config/site";
 
 const aboutImg = "https://images.unsplash.com/photo-1770452603217-89b4f03e8271?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25maWRlbnQlMjBidXNpbmVzc21hbiUyMHN1aXQlMjBwb3J0cmFpdCUyMHN0dWRpb3xlbnwxfHx8fDE3NzQ4NTU4NjN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
 
@@ -56,15 +57,15 @@ export function About() {
         <div>
           {[
             <p key="o" className="tracking-[3px] uppercase mb-2" style={{ color: "var(--accent)", fontSize: 11, transition: "color 0.4s" }}>LET ME INTRODUCE MYSELF</p>,
-            <h2 key="t" className="mb-3" style={{ color: "var(--accent)", fontSize: 42, fontWeight: 700, transition: "color 0.4s" }}>About me</h2>,
-            <h3 key="s" className="mb-4" style={{ color: "var(--text1)", fontSize: 20, fontWeight: 600, transition: "color 0.4s" }}>A story of hardwork and perseverance.</h3>,
+            <h2 key="t" className="mb-3" style={{ color: "var(--accent)", fontSize: 42, fontWeight: 700, transition: "color 0.4s" }}>Tentang Saya</h2>,
+            <h3 key="s" className="mb-4" style={{ color: "var(--text1)", fontSize: 20, fontWeight: 600, transition: "color 0.4s" }}>Sebuah kisah tentang kerja keras dan ketekunan.</h3>,
             <p key="b" className="mb-6" style={{ color: "var(--text2)", fontSize: 15, lineHeight: 1.8, transition: "color 0.4s" }}>
-              Hi I'm Alex Wallace. I have a strong passion for design. I specialize in UI/UX Design and my passion is all about building elegant and professional user interfaces and websites. I also do branding and identity design such as logo design, letterhead and business card, along with photo editing, image cropping and other graphic design services.
+             {A.tentangSaya}
             </p>,
             <div key="c" className="mb-8">
               <p style={{ color: "var(--text1)", fontSize: 16, fontWeight: 600, transition: "color 0.4s" }}>Contact</p>
               <p style={{ color: "var(--text2)", fontSize: 14, transition: "color 0.4s" }}>Feel free to contact me.</p>
-              <p style={{ color: "var(--accent)", fontSize: 14, transition: "color 0.4s" }} className="mt-1">alex.wallace@gmail.com</p>
+              <p style={{ color: "var(--accent)", fontSize: 14, transition: "color 0.4s" }} className="mt-1">{A.contact}</p>
             </div>,
             <div key="bt" className="flex gap-4">
               <motion.button className="px-8 py-3 rounded-full" style={{ background: "var(--accent)", color: "var(--btn-text)", fontWeight: 600, fontSize: 14, transition: "background 0.4s, color 0.4s" }} whileHover={{ scale: 1.05 }}>HIRE ME</motion.button>
