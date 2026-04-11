@@ -10,14 +10,14 @@ const ThemeCtx = createContext<{ mode: Mode; toggle: () => void }>({
 export const useTheme = () => useContext(ThemeCtx);
 
 const darkVars: Record<string, string> = {
-  "--bg": "#0d0d0d",
-  "--surface": "#1a1a1a",
-  "--accent": "#00e676",
-  "--text1": "#ffffff",
-  "--text2": "#888888",
-  "--nav": "#111111",
-  "--btn-text": "#000000",
-  "--overlay": "rgba(0,0,0,0.85)",
+  "--bg": "#1a1210",       // warm charcoal, tidak hitam murni
+  "--surface": "#231815",  // surface sedikit lebih terang
+  "--accent": "#c0392b",   // merah vivid agar pop
+  "--text1": "#f0ebe8",    // putih warm, tidak cold white
+  "--text2": "#9e8e8a",    // abu warm tone
+  "--nav": "#150e0c",      // nav sedikit lebih gelap dari bg
+  "--btn-text": "#ffffff",
+  "--overlay": "rgba(15,8,7,0.88)",
 };
 
 const lightVars: Record<string, string> = {

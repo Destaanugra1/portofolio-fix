@@ -23,7 +23,7 @@ const navLinks: NavLink[] = [
   { label: "Skills",    type: "scroll", id: "skills"    },
   { label: "Portfolio", type: "scroll", id: "portfolio" },
   { label: "Contact",   type: "scroll", id: "contact"   },
-  { label: "Template",   type: "route", href: "/template" },
+  { label: "Store",   type: "route", href: "/template" },
   { label: "Blog",   type: "route", href: "/blog" },
   // Contoh nambah halaman baru (route):
   // { label: "Template", type: "route", href: "/template" },
@@ -177,7 +177,7 @@ export function Navbar() {
             >
               {mode === "dark" ? <Sun size={16} /> : <Moon size={16} />}
             </button>
-            <button
+            {/* <button
               onClick={() => scrollTo("contact")}
               className="border px-5 py-2 rounded-full text-sm"
               style={{
@@ -196,7 +196,7 @@ export function Navbar() {
               }}
             >
               LET'S TALK
-            </button>
+            </button> */}
           </div>
 
           {/* Mobile: Theme toggle + Hamburger */}
@@ -430,7 +430,7 @@ export function Navbar() {
               </nav>
 
               {/* Sidebar Footer CTA */}
-              <div style={{ padding: "0 24px" }}>
+              {/* <div style={{ padding: "0 24px" }}>
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -452,7 +452,7 @@ export function Navbar() {
                 >
                   LET'S TALK
                 </motion.button>
-              </div>
+              </div> */}
             </motion.aside>
           </>
         )}

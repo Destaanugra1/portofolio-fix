@@ -1,10 +1,21 @@
 import { motion, useInView } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 export function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-20%" });
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const mailtoLink = `mailto:destaanugrapratama@gmail.com?subject=Website Contact Form from ${name}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+    window.location.href = mailtoLink;
+  };
+
   return (
     <section id="contact" className="py-24" style={{ background: "var(--surface)", transition: "background 0.4s" }}>
       <div ref={ref} className="max-w-[1280px] mx-auto px-6">
@@ -30,12 +41,35 @@ export function Contact() {
               ))}
             </div>
           </motion.div>
-          <motion.form className="flex flex-col gap-4" initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 }} onSubmit={(e) => e.preventDefault()}>
-            {["Your Name", "Your Email"].map((ph) => (
-              <input key={ph} placeholder={ph} className="px-5 py-3 rounded-xl border outline-none transition-colors" style={{ borderColor: "color-mix(in srgb, var(--text2) 30%, transparent)", background: "var(--bg)", color: "var(--text1)", transition: "all 0.4s" }} />
-            ))}
-            <textarea placeholder="Your Message" rows={5} className="px-5 py-3 rounded-xl border outline-none resize-none transition-colors" style={{ borderColor: "color-mix(in srgb, var(--text2) 30%, transparent)", background: "var(--bg)", color: "var(--text1)", transition: "all 0.4s" }} />
-            <motion.button className="px-8 py-3 rounded-full self-start" style={{ background: "var(--accent)", color: "var(--btn-text)", fontWeight: 600, fontSize: 14, transition: "background 0.4s, color 0.4s" }} whileHover={{ scale: 1.05 }}>SEND MESSAGE</motion.button>
+          <motion.form className="flex flex-col gap-4" initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 }} onSubmit={handleSubmit}>
+            <input 
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your Name" 
+              required
+              className="px-5 py-3 rounded-xl border outline-none transition-colors" 
+              style={{ borderColor: "color-mix(in srgb, var(--text2) 30%, transparent)", background: "var(--bg)", color: "var(--text1)", transition: "all 0.4s" }} 
+            />
+            <input 
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Your Email" 
+              required
+              className="px-5 py-3 rounded-xl border outline-none transition-colors" 
+              style={{ borderColor: "color-mix(in srgb, var(--text2) 30%, transparent)", background: "var(--bg)", color: "var(--text1)", transition: "all 0.4s" }} 
+            />
+            <textarea 
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Your Message" 
+              rows={5} 
+              required
+              className="px-5 py-3 rounded-xl border outline-none resize-none transition-colors" 
+              style={{ borderColor: "color-mix(in srgb, var(--text2) 30%, transparent)", background: "var(--bg)", color: "var(--text1)", transition: "all 0.4s" }} 
+            />
+            <motion.button type="submit" className="px-8 py-3 rounded-full self-start" style={{ background: "var(--accent)", color: "var(--btn-text)", fontWeight: 600, fontSize: 14, transition: "background 0.4s, color 0.4s" }} whileHover={{ scale: 1.05 }}>SEND MESSAGE</motion.button>
           </motion.form>
         </div>
       </div>

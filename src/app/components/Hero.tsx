@@ -75,6 +75,7 @@ export function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             whileHover={{ scale: 1.05, boxShadow: "0 0 20px color-mix(in srgb, var(--accent) 40%, transparent)" }}
+            onClick={() => document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" })}
           >lihat portofolio</motion.button>
           <motion.div
             className="flex items-center gap-2 mt-12"

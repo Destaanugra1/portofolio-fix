@@ -23,7 +23,7 @@ export function TemplateLayout({ children }: Props) {
     >
       <CustomCursor />
       <TemplateNavbar />
-      <main style={{ paddingTop: "72px" }}>{children}</main>
+      <main>{children}</main>
     </div>
   );
 }

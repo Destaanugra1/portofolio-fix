@@ -3,8 +3,8 @@ import { ThemeProvider } from "./components/ThemeContext";
 import { PortfolioLayout } from "./layouts/PortfolioLayout";
 import { TemplateLayout } from "./layouts/TemplateLayout";
 import { HomePage } from "./pages/HomePage";
-import TemplatePage from "./pages/TemplatePage";
 import { Inforasi } from "./pages/blog/Inforasi";
+import TemplatePage from "./pages/store/TemplatePage";
 
 export default function App() {
   return (

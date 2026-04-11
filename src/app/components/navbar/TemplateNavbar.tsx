@@ -53,7 +53,10 @@ export function TemplateNavbar() {
               : scrolled && mode === "dark"
                 ? "0 2px 20px rgba(0,0,0,0.4)"
                 : "none",
-          transition: "background 0.4s, box-shadow 0.4s",
+          transform: scrolled ? "translateY(0)" : "translateY(-100%)",
+          opacity: scrolled ? 1 : 0,
+          pointerEvents: scrolled ? "auto" : "none",
+          transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease-in-out, background 0.4s, box-shadow 0.4s",
         }}
       >
         <div className="max-w-[1280px] mx-auto flex items-center justify-between px-5 py-4">
