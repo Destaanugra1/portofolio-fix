@@ -14,9 +14,9 @@ export function Contact() {
           <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }}>
             <div className="flex flex-col gap-6">
               {[
-                { icon: Mail, label: "Email", value: "alex.wallace@gmail.com" },
-                { icon: Phone, label: "Phone", value: "+63 912 345 6789" },
-                { icon: MapPin, label: "Location", value: "Manila, Philippines" },
+                { icon: Mail, label: "Email", value: "destaanugrapratama@gmail.com" },
+                { icon: Phone, label: "Phone", value: "082280120510" },
+                { icon: MapPin, label: "Location", value: "Indonesia, Lampung" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: "color-mix(in srgb, var(--accent) 10%, transparent)", transition: "background 0.4s" }}>

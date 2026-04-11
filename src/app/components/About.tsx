@@ -64,7 +64,7 @@ export function About() {
             </p>,
             <div key="c" className="mb-8">
               <p style={{ color: "var(--text1)", fontSize: 16, fontWeight: 600, transition: "color 0.4s" }}>Contact</p>
-              <p style={{ color: "var(--text2)", fontSize: 14, transition: "color 0.4s" }}>Feel free to contact me.</p>
+              <p style={{ color: "var(--text2)", fontSize: 14, transition: "color 0.4s" }}>Gratis untuk kontak saya</p>
               <p style={{ color: "var(--accent)", fontSize: 14, transition: "color 0.4s" }} className="mt-1">{A.contact}</p>
             </div>,
             <div key="bt" className="flex gap-4">
