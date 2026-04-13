@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Banner } from '../../components/store/Banner';
-import { FeaturedCard } from '../../components/store/FeaturedCard';
+// import { FeaturedCard } from '../../components/store/FeaturedCard';
 import { TemplateCard } from '../../components/store/TemplateCard';
 
 
@@ -47,7 +47,7 @@ const TemplatePage = () => {
         categories={dynamicCategories}
       />
 
-      <FeaturedCard />
+      {/* <FeaturedCard /> */}
 
       {/* Template Grid Section */}
       <div id="template-grid" className="max-w-[900px] mx-auto px-4 mt-12 mb-6">
