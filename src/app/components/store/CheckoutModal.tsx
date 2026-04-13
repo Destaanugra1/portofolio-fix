@@ -204,11 +204,32 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, t
                  )}
               </div>
               
-              <div className="w-full bg-[#fef3c7] text-[#92400e] text-xs px-4 py-3 rounded-lg flex gap-2 items-center justify-center text-center">
+              <div className="w-full bg-[#fef3c7] text-[#92400e] text-xs px-4 py-3 rounded-lg flex gap-2 items-center justify-center text-center mb-3">
                  <div className="animate-pulse w-2 h-2 rounded-full bg-[#92400e]"></div>
                  Menunggu konfirmasi pembayaran...
               </div>
 
+              <button 
+                onClick={async () => {
+                  if (!orderId) return;
+                  try {
+                    const res = await fetch(`${API_URL}/store/orders/${orderId}/status`);
+                    const data = await res.json();
+                    if (data.status === 'processing' || data.status === 'paid' || data.status === 'delivered') {
+                      window.location.href = `/order/status?id=${orderId}`;
+                    } else if (data.status === 'canceled' || data.status === 'failed' || data.status === 'expired' || data.status === 'returned') {
+                      window.location.href = `/order/error?id=${orderId}`;
+                    } else {
+                      alert("Pembayaran belum kami terima. Harap selesaikan pembayaran terlebih dahulu.");
+                    }
+                  } catch (err) {
+                    console.error("Manual check error", err);
+                  }
+                }}
+                className="w-full py-3 bg-gray-900 text-white rounded-xl font-bold hover:bg-gray-800 transition-colors cursor-pointer text-sm"
+              >
+                Cek Transaksi
+              </button>
                {/* Tombol Testing (Hanya di mode Development) */}
                {import.meta.env.DEV && (
                  <button

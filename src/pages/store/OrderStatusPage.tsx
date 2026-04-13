@@ -135,11 +135,27 @@ export default function OrderStatusPage() {
               <span className="font-medium text-gray-900 dark:text-gray-200">{order.customerEmail}</span>
             </div>
             
-            <div className="mt-8 bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl flex justify-between items-center">
-              <span className="font-semibold text-gray-700 dark:text-gray-300">Total Tagihan</span>
-              <span className="text-xl font-black text-[#059669]">
+            <div className="flex justify-between items-center py-3 border-b border-gray-100 dark:border-gray-800">
+              <span className="text-gray-500">Total Tagihan</span>
+              <span className="font-bold text-gray-900 dark:text-gray-200">
                  Rp {Number(order.total).toLocaleString('id-ID')}
               </span>
+            </div>
+            <div className="flex justify-between items-center py-3 border-b border-gray-100 dark:border-gray-800">
+              <span className="text-gray-500">Status</span>
+              {isSuccess ? (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#d1fae5] text-[#059669] text-xs font-bold border border-[#a7f3d0]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#059669]"></span> Berhasil
+                </span>
+              ) : isFailed ? (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs font-bold border border-red-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-700"></span> Gagal
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-bold border border-orange-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-700"></span> Tertunda
+                </span>
+              )}
             </div>
           </div>
 

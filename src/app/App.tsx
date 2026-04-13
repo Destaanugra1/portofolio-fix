@@ -6,6 +6,7 @@ import { HomePage } from "./pages/HomePage";
 import { Inforasi } from "./pages/blog/Inforasi";
 import TemplatePage from "./pages/store/TemplatePage";
 import OrderStatusPage from "../pages/store/OrderStatusPage";
+import OrderErrorPage from "../pages/store/OrderErrorPage";
 
 
 export default function App() {
@@ -39,6 +40,15 @@ export default function App() {
           element={
             <TemplateLayout>
               <OrderStatusPage />
+            </TemplateLayout>
+          }
+        />
+
+        <Route
+          path="/order/error"
+          element={
+            <TemplateLayout>
+              <OrderErrorPage />
             </TemplateLayout>
           }
         />
