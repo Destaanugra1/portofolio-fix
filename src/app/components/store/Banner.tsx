@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import BannerImg from './../../../assets/banner1.png'
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "";
+
+function cloudinaryUrl(publicId: string) {
+  if (!publicId) return "";
+  if (publicId.startsWith("http")) return publicId;
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto/${publicId}`;
+}
 
 interface BannerProps {
   searchQuery: string;
@@ -17,15 +26,45 @@ export const Banner: React.FC<BannerProps> = ({
   setActiveCategory,
   categories,
 }) => {
+  const [desktopImage, setDesktopImage] = useState("");
+  const [mobileImage, setMobileImage] = useState("");
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      try {
+        const res = await fetch(`${API_URL}/store/banners`);
+        const result = await res.json();
+        if (result.success && result.data) {
+          setDesktopImage(cloudinaryUrl(result.data.desktopImageUrl));
+          setMobileImage(cloudinaryUrl(result.data.mobileImageUrl));
+        }
+      } catch (e) {
+        console.error("Failed to load banner", e);
+      }
+    };
+    fetchBanner();
+  }, []);
+
   return (
     <div className="relative overflow-hidden flex flex-col items-center justify-center h-[100vh] bg-[#b91c1c]">
-      {/* Full-screen Background Image */}
-      <img 
-        src={BannerImg} 
-        alt="Promo Banner" 
-        className="absolute inset-0 w-full h-full z-0" 
-        style={{ objectFit: "cover", objectPosition: "center" }}
-      />
+      {/* Background Image (Dynamic Split for Desktop/Mobile) */}
+      {desktopImage && mobileImage ? (
+        <picture className="absolute inset-0 w-full h-full z-0">
+          <source media="(max-width: 768px)" srcSet={mobileImage} />
+          <img 
+            src={desktopImage} 
+            alt="Promo Banner" 
+            className="w-full h-full object-cover object-center" 
+          />
+        </picture>
+      ) : (
+        <img 
+          src={BannerImg} 
+          alt="Promo Banner" 
+          className="absolute inset-0 w-full h-full z-0" 
+          style={{ objectFit: "cover", objectPosition: "center" }}
+        />
+      )}
       {/* Dark overlay to ensure text remains readable */}
       <div className="absolute inset-0 bg-black/30 z-0 pointer-events-none" />
       
