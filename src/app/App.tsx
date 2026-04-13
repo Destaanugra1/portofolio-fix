@@ -5,6 +5,7 @@ import { TemplateLayout } from "./layouts/TemplateLayout";
 import { HomePage } from "./pages/HomePage";
 import { Inforasi } from "./pages/blog/Inforasi";
 import TemplatePage from "./pages/store/TemplatePage";
+import TemplateDetailPage from "../pages/store/TemplateDetailPage";
 import OrderStatusPage from "../pages/store/OrderStatusPage";
 import OrderErrorPage from "../pages/store/OrderErrorPage";
 
@@ -30,6 +31,16 @@ export default function App() {
           element={
             <TemplateLayout>
               <TemplatePage />
+            </TemplateLayout>
+          }
+        />
+
+        {/* ── Template Detail ── */}
+        <Route
+          path="/template/:id"
+          element={
+            <TemplateLayout>
+              <TemplateDetailPage />
             </TemplateLayout>
           }
         />
