@@ -42,9 +42,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, t
         try {
           const res = await fetch(`${API_URL}/store/orders/${orderId}/status`);
           const data = await res.json();
-          if (data.status === 'processing' || data.status === 'paid' || data.status === 'delivered') {
+          if (data.status === 'processing' || data.status === 'paid' || data.status === 'delivered' || data.status === 'success') {
             clearInterval(interval);
             window.location.href = `/order/status?id=${orderId}`;
+          } else if (data.status === 'canceled' || data.status === 'failed' || data.status === 'expired' || data.status === 'returned') {
+            clearInterval(interval);
+            window.location.href = `/order/error?id=${orderId}`;
           }
         } catch (err) {
           console.error("Polling error", err);
@@ -215,7 +218,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, t
                   try {
                     const res = await fetch(`${API_URL}/store/orders/${orderId}/status`);
                     const data = await res.json();
-                    if (data.status === 'processing' || data.status === 'paid' || data.status === 'delivered') {
+                    if (data.status === 'processing' || data.status === 'paid' || data.status === 'delivered' || data.status === 'success') {
                       window.location.href = `/order/status?id=${orderId}`;
                     } else if (data.status === 'canceled' || data.status === 'failed' || data.status === 'expired' || data.status === 'returned') {
                       window.location.href = `/order/error?id=${orderId}`;
