@@ -12,6 +12,7 @@ interface TemplateCardProps {
   bg: string;
   id?: number;
   imageUrl?: string | null;
+  salesCount?: number;
 }
 
 export const TemplateCard: React.FC<TemplateCardProps> = ({
@@ -25,6 +26,7 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
   isNew,
   bg,
   imageUrl,
+  salesCount = 0,
 }) => {
   const navigate = useNavigate();
   const isFree = price === 0;
@@ -73,13 +75,19 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
 
       {/* Card Body */}
       <div className="p-3 flex-1 flex flex-col justify-between">
-        <div>
+        <div className="mb-3">
           <span className="text-[9px] tracking-[1.5px] text-[#b91c1c] font-bold uppercase mb-1 block">
             {category}
           </span>
-          <h3 className="text-[13px] font-medium mb-[10px]" style={{ color: "var(--text1)", transition: "color 0.4s" }}>
+          <h3 className="text-[13px] font-medium mb-1 line-clamp-1" style={{ color: "var(--text1)", transition: "color 0.4s" }}>
             {title}
           </h3>
+          <div className="flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-orange-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <span className="text-[10px] font-medium opacity-70" style={{ color: "var(--text2)" }}>
+              {salesCount} Terjual
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center justify-between mt-auto">

@@ -3,7 +3,6 @@ import { Banner } from '../../components/store/Banner';
 import { FeaturedCard } from '../../components/store/FeaturedCard';
 import { TemplateCard } from '../../components/store/TemplateCard';
 
-const CATEGORIES = ["Semua", "Landing Page", "Dashboard", "Portfolio", "E-Commerce", "Admin Panel"];
 
 const TemplatePage = () => {
   const [activeCategory, setActiveCategory] = useState("Semua");
@@ -36,6 +35,7 @@ const TemplatePage = () => {
     const matchSearch = (t.title?.toLowerCase() ?? "").includes(searchQuery.toLowerCase());
     return matchCat && matchSearch;
   });
+  const dynamicCategories = ["Semua", ...Array.from(new Set(templates.map(t => t.category || "General")))];
 
   return (
     <div className="min-h-screen pb-20" style={{ background: "var(--bg)", transition: "background 0.4s" }}>
@@ -44,7 +44,7 @@ const TemplatePage = () => {
         setActiveCategory={setActiveCategory}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
-        categories={CATEGORIES}
+        categories={dynamicCategories}
       />
 
       <FeaturedCard />

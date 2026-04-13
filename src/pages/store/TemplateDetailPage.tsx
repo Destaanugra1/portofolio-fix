@@ -122,7 +122,7 @@ export default function TemplateDetailPage() {
     );
   }
 
-  const { title, description, category, price, finalPrice, discountPct, imageUrls, badge } = product;
+  const { title, description, category, price, finalPrice, discountPct, imageUrls, badge, salesCount } = product;
   const hasDiscount = discountPct > 0;
   const isFree = price === 0;
   const checkoutPrice = finalPrice ?? price;
@@ -190,6 +190,10 @@ export default function TemplateDetailPage() {
                   -{discountPct}% OFF
                 </span>
               )}
+              <div className="ml-auto flex items-center gap-1 opacity-80" style={{ color: "var(--text2)" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-orange-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <span className="text-[11px] font-medium">{salesCount || 0} Terjual</span>
+              </div>
             </div>
 
             {/* Title */}
