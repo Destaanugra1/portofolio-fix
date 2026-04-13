@@ -7,15 +7,19 @@ interface TemplateCardProps {
   badge: "Free" | "Pro";
   isNew: boolean;
   bg: string;
+  id?: number;
+  onBuy?: (template: any) => void;
 }
 
 export const TemplateCard: React.FC<TemplateCardProps> = ({
+  id,
   title, 
   category, 
   price, 
   badge, 
   isNew, 
   bg,
+  onBuy,
 }) => {
   const isFree = price === 0;
   
@@ -61,7 +65,10 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
             <button className="px-[10px] py-[4px] border rounded-[6px] text-[10px] font-medium cursor-pointer hover:bg-black/5" style={{ color: "var(--text1)", borderColor: "color-mix(in srgb, var(--text2) 30%, transparent)", transition: "all 0.4s" }}>
               Preview
             </button>
-            <button className="px-[10px] py-[4px] bg-[#b91c1c] text-white rounded-[6px] text-[10px] font-medium hover:bg-red-700 transition-colors cursor-pointer">
+            <button 
+              onClick={() => onBuy && onBuy({ id, title, price })}
+              className="px-[10px] py-[4px] bg-[#b91c1c] text-white rounded-[6px] text-[10px] font-medium hover:bg-red-700 transition-colors cursor-pointer"
+            >
               {isFree ? "Download" : "Beli"}
             </button>
           </div>

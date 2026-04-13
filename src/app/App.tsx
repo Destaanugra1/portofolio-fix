@@ -5,6 +5,8 @@ import { TemplateLayout } from "./layouts/TemplateLayout";
 import { HomePage } from "./pages/HomePage";
 import { Inforasi } from "./pages/blog/Inforasi";
 import TemplatePage from "./pages/store/TemplatePage";
+import OrderStatusPage from "../pages/store/OrderStatusPage";
+
 
 export default function App() {
   return (
@@ -27,6 +29,16 @@ export default function App() {
           element={
             <TemplateLayout>
               <TemplatePage />
+            </TemplateLayout>
+          }
+        />
+
+        {/* ── Order Status / Invoice ── */}
+        <Route
+          path="/order/status"
+          element={
+            <TemplateLayout>
+              <OrderStatusPage />
             </TemplateLayout>
           }
         />
