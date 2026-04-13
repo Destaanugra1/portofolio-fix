@@ -11,12 +11,14 @@ interface TemplateCardProps {
   isNew: boolean;
   bg: string;
   id?: number;
+  slug?: string;
   imageUrl?: string | null;
   salesCount?: number;
 }
 
 export const TemplateCard: React.FC<TemplateCardProps> = ({
   id,
+  slug,
   title,
   category,
   price,
@@ -37,7 +39,7 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
     <div
       className="border border-border rounded-xl overflow-hidden flex flex-col hover:shadow-lg transition-shadow cursor-pointer group"
       style={{ background: "var(--surface)", borderColor: "color-mix(in srgb, var(--text2) 20%, transparent)" }}
-      onClick={() => id && navigate(`/template/${id}`)}
+      onClick={() => (slug || id) && navigate(`/template/${slug || id}`)}
     >
       {/* Top Image area */}
       <div
@@ -109,7 +111,7 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
           </div>
 
           <button
-            onClick={(e) => { e.stopPropagation(); id && navigate(`/template/${id}`); }}
+            onClick={(e) => { e.stopPropagation(); (slug || id) && navigate(`/template/${slug || id}`); }}
             className="px-[10px] py-[4px] border rounded-[6px] text-[10px] font-medium cursor-pointer hover:bg-black/5 transition-all"
             style={{ color: "var(--text1)", borderColor: "color-mix(in srgb, var(--text2) 30%, transparent)" }}
           >

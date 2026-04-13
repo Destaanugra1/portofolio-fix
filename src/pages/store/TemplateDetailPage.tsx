@@ -70,7 +70,7 @@ function PanImage({ src, alt }: { src: string; alt: string }) {
 }
 
 export default function TemplateDetailPage() {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
 
   const [product, setProduct] = useState<any>(null);
@@ -84,7 +84,7 @@ export default function TemplateDetailPage() {
   useEffect(() => {
     const fetch_ = async () => {
       try {
-        const res = await fetch(`${API_URL}/store/products/${id}`);
+        const res = await fetch(`${API_URL}/store/products/${slug}`);
         const data = await res.json();
         if (data.success && data.data) {
           setProduct(data.data);
@@ -97,8 +97,8 @@ export default function TemplateDetailPage() {
         setLoading(false);
       }
     };
-    if (id) fetch_();
-  }, [id, API_URL]);
+    if (slug) fetch_();
+  }, [slug, API_URL]);
 
   if (loading) {
     return (

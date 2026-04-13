@@ -37,7 +37,7 @@ export default function App() {
 
         {/* ── Template Detail ── */}
         <Route
-          path="/template/:id"
+          path="/template/:slug"
           element={
             <TemplateLayout>
               <TemplateDetailPage />
