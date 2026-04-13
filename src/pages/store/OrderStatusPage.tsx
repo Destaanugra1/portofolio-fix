@@ -65,8 +65,8 @@ export default function OrderStatusPage() {
     );
   }
 
-  const isSuccess = order.status === "processing" || order.status === "paid" || order.status === "delivered";
-  const isFailed = order.status === "returned" || order.status === "canceled" || order.status === "failed";
+  const isSuccess = order.status === "processing" || order.status === "paid" || order.status === "delivered" || order.status === "success";
+  const isFailed = order.status === "returned" || order.status === "canceled" || order.status === "failed" || order.status === "expired";
   
   return (
     <div className="max-w-2xl mx-auto px-4 py-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -162,9 +162,18 @@ export default function OrderStatusPage() {
           {/* Action Buttons */}
           <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row gap-3">
              {isSuccess && (
-                <button className="flex-1 flex items-center justify-center gap-2 bg-[#b91c1c] hover:bg-red-700 text-white py-3.5 px-6 rounded-xl font-bold transition-all shadow-lg shadow-red-500/20 hover:shadow-red-500/40">
+                <button 
+                  onClick={() => {
+                     if (order.fileUrl) {
+                        window.open(order.fileUrl, '_blank');
+                     } else {
+                        alert("Maaf, link unduhan belum tersedia. Silakan hubungi admin.");
+                     }
+                  }}
+                  className="flex-1 flex items-center justify-center gap-2 bg-[#b91c1c] hover:bg-red-700 text-white py-3.5 px-6 rounded-xl font-bold transition-all shadow-lg shadow-red-500/20 hover:shadow-red-500/40"
+                >
                   <Download size={18} />
-                  Download Template
+                  Download {order.productName || "Template"}
                 </button>
              )}
              <button 
