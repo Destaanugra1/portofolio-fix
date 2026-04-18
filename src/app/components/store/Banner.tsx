@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { apiFetch } from '../../../lib/apiClient';
-// import BannerImg from './../../../assets/banner1.png'
+import BannerImg from './../../../assets/banner1.png'
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "";
@@ -65,7 +65,7 @@ export const Banner: React.FC<BannerProps> = ({
         </picture>
       ) : (
         <img 
-          src="null"
+          src={BannerImg}
           alt="ini Banner" 
           className="absolute inset-0 w-full h-full z-0 bg-gray-900/50" 
           style={{ objectFit: "cover", objectPosition: "center" }}

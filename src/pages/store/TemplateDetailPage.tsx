@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router";
 import { ArrowLeft, ShoppingCart, Tag, ImageOff } from "lucide-react";
 import { CheckoutModal } from "../../app/components/store/CheckoutModal";
 import { apiFetch } from "../../lib/apiClient";
+import TemplatePage from "../../app/pages/store/TemplatePage";
+import RecommendedProducts from "../../app/components/cardRender/rekomendasi";
 
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "";
 
@@ -269,11 +271,14 @@ export default function TemplateDetailPage() {
               {isFree ? "Download Gratis" : "Beli Sekarang"}
             </button>
 
-            <p className="text-center text-xs" style={{ color: "var(--text2)" }}>
+            {/* <p className="text-center text-xs" style={{ color: "var(--text2)" }}>
               Produk digital — file dikirim setelah pembayaran dikonfirmasi
-            </p>
+            </p> */}
           </div>
         </div>
+
+        {/* Rekomendasi — full width, di luar grid 2-kolom */}
+        <RecommendedProducts currentId={product?.id} />
       </div>
 
       <CheckoutModal
