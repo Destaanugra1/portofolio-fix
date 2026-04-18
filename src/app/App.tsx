@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router";
 import { ThemeProvider } from "./components/ThemeContext";
+import { StoreProvider } from "./components/store/StoreContext";
 import { PortfolioLayout } from "./layouts/PortfolioLayout";
 import { TemplateLayout } from "./layouts/TemplateLayout";
 import { HomePage } from "./pages/HomePage";
@@ -9,11 +10,11 @@ import TemplateDetailPage from "../pages/store/TemplateDetailPage";
 import OrderStatusPage from "../pages/store/OrderStatusPage";
 import OrderErrorPage from "../pages/store/OrderErrorPage";
 
-
 export default function App() {
   return (
     <ThemeProvider>
-      <Routes>
+      <StoreProvider>
+        <Routes>
 
         {/* ── Portfolio / Homepage ── */}
         <Route
@@ -79,7 +80,8 @@ export default function App() {
         {/* ── Future: Admin / Backend ── */}
         {/* <Route path="/admin/*" element={<AdminLayout><AdminPage /></AdminLayout>} /> */}
 
-      </Routes>
+        </Routes>
+      </StoreProvider>
     </ThemeProvider>
   );
 }

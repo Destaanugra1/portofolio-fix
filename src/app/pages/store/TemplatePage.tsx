@@ -1,33 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Banner } from '../../components/store/Banner';
 // import { FeaturedCard } from '../../components/store/FeaturedCard';
 import { TemplateCard } from '../../components/store/TemplateCard';
-
+import { useStoreGlobally } from '../../components/store/StoreContext';
 
 const TemplatePage = () => {
   const [activeCategory, setActiveCategory] = useState("Semua");
   const [searchQuery, setSearchQuery] = useState("");
-  const [templates, setTemplates] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch(`${API_URL}/store/products`);
-        const result = await res.json();
-        if (result.success) {
-          setTemplates(result.data);
-        }
-      } catch (err) {
-        console.error("Failed to load products", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProducts();
-  }, [API_URL]);
+  
+  // Ambil state dari context
+  const { templates, loading } = useStoreGlobally();
 
   const filteredTemplates = templates.filter(t => {
     const matchCat = activeCategory === "Semua" ||
@@ -62,7 +44,23 @@ const TemplatePage = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[14px]">
           {loading ? (
-            <div className="col-span-full py-10 flex justify-center text-[var(--text2)]">Memuat produk...</div>
+            Array.from({ length: 6 }).map((_, i) => (
+              <div
+                key={i}
+                className="border rounded-xl h-[280px] overflow-hidden flex flex-col"
+                style={{ background: "var(--surface)", borderColor: "color-mix(in srgb, var(--text2) 15%, transparent)" }}
+              >
+                <div className="h-[140px] w-full animate-pulse opacity-20" style={{ background: "var(--text2)" }} />
+                <div className="p-3 flex-1 flex flex-col gap-3 justify-center">
+                  <div className="h-3 w-16 animate-pulse rounded-full opacity-20" style={{ background: "var(--text2)" }} />
+                  <div className="h-4 w-3/4 animate-pulse rounded-md opacity-20" style={{ background: "var(--text2)" }} />
+                  <div className="mt-auto flex justify-between items-center">
+                    <div className="h-4 w-1/3 animate-pulse rounded-md opacity-20" style={{ background: "var(--text2)" }} />
+                    <div className="h-6 w-1/4 animate-pulse rounded-md opacity-20" style={{ background: "var(--text2)" }} />
+                  </div>
+                </div>
+              </div>
+            ))
           ) : filteredTemplates.length === 0 ? (
             <div className="col-span-full py-10 flex justify-center text-[var(--text2)]">Produk tidak tersedia.</div>
           ) : (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../../../lib/apiClient';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -40,7 +41,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, t
     if (step === 'payment' && orderId) {
       interval = setInterval(async () => {
         try {
-          const res = await fetch(`${API_URL}/store/orders/${orderId}/status`);
+          const res = await apiFetch(`${API_URL}/store/orders/${orderId}/status`);
           const data = await res.json();
           if (data.status === 'processing' || data.status === 'paid' || data.status === 'delivered' || data.status === 'success') {
             clearInterval(interval);
@@ -63,7 +64,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, t
     e.preventDefault();
     setStep('loading');
     try {
-      const res = await fetch(`${API_URL}/store/checkout`, {
+      const res = await apiFetch(`${API_URL}/store/checkout`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -216,7 +217,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, t
                 onClick={async () => {
                   if (!orderId) return;
                   try {
-                    const res = await fetch(`${API_URL}/store/orders/${orderId}/status`);
+                    const res = await apiFetch(`${API_URL}/store/orders/${orderId}/status`);
                     const data = await res.json();
                     if (data.status === 'processing' || data.status === 'paid' || data.status === 'delivered' || data.status === 'success') {
                       window.location.href = `/order/status?id=${orderId}`;
@@ -239,7 +240,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, t
                    onClick={async () => {
                       if (!orderId) return;
                       try {
-                        const res = await fetch(`${API_URL}/store/orders/${orderId}/mock-pay`, { method: 'POST' });
+                        const res = await apiFetch(`${API_URL}/store/orders/${orderId}/mock-pay`, { method: 'POST' });
                         if (res.ok) {
                           window.location.href = `/order/status?id=${orderId}`;
                         }

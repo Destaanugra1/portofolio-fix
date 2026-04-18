@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router";
 import { CheckCircle, XCircle, Clock, Receipt, Download, ArrowLeft } from "lucide-react";
+import { apiFetch } from "../../lib/apiClient";
 
 export default function OrderStatusPage() {
   const [searchParams] = useSearchParams();
@@ -21,7 +22,7 @@ export default function OrderStatusPage() {
 
     const fetchOrder = async () => {
       try {
-        const res = await fetch(`${API_URL}/store/orders/${orderId}`);
+        const res = await apiFetch(`${API_URL}/store/orders/${orderId}`);
         const data = await res.json();
         if (data.success && data.order) {
           setOrder(data.order);

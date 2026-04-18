@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
+import { apiFetch } from '../../../lib/apiClient';
 // import BannerImg from './../../../assets/banner1.png'
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
@@ -28,11 +29,12 @@ export const Banner: React.FC<BannerProps> = ({
 }) => {
   const [desktopImage, setDesktopImage] = useState("");
   const [mobileImage, setMobileImage] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBanner = async () => {
       try {
-        const res = await fetch(`${API_URL}/store/banners`);
+        const res = await apiFetch(`${API_URL}/store/banners`);
         const result = await res.json();
         if (result.success && result.data) {
           setDesktopImage(cloudinaryUrl(result.data.desktopImageUrl));
@@ -40,15 +42,19 @@ export const Banner: React.FC<BannerProps> = ({
         }
       } catch (e) {
         console.error("Failed to load banner", e);
+      } finally {
+        setLoading(false);
       }
     };
     fetchBanner();
   }, []);
 
   return (
-    <div className="relative overflow-hidden flex flex-col items-center justify-center h-[100vh] bg-[#b91c1c]">
+    <div className="relative overflow-hidden flex flex-col items-center justify-center h-[100vh]" style={{ backgroundColor: "var(--bg)" }}>
       {/* Background Image (Dynamic Split for Desktop/Mobile) */}
-      {desktopImage && mobileImage ? (
+      {loading ? (
+        <div className="absolute inset-0 w-full h-full z-0 animate-pulse bg-gray-900/50" />
+      ) : desktopImage && mobileImage ? (
         <picture className="absolute inset-0 w-full h-full z-0">
           <source media="(max-width: 768px)" srcSet={mobileImage} />
           <img 
@@ -61,7 +67,7 @@ export const Banner: React.FC<BannerProps> = ({
         <img 
           src="null"
           alt="ini Banner" 
-          className="absolute inset-0 w-full h-full z-0" 
+          className="absolute inset-0 w-full h-full z-0 bg-gray-900/50" 
           style={{ objectFit: "cover", objectPosition: "center" }}
         />
       )}

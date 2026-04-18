@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { ArrowLeft, ShoppingCart, Tag, ImageOff } from "lucide-react";
 import { CheckoutModal } from "../../app/components/store/CheckoutModal";
+import { apiFetch } from "../../lib/apiClient";
 
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "";
 
@@ -78,13 +79,14 @@ export default function TemplateDetailPage() {
   const [error, setError] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
   useEffect(() => {
     const fetch_ = async () => {
       try {
-        const res = await fetch(`${API_URL}/store/products/${slug}`);
+        const res = await apiFetch(`${API_URL}/store/products/${slug}`);
         const data = await res.json();
         if (data.success && data.data) {
           setProduct(data.data);
@@ -126,6 +128,7 @@ export default function TemplateDetailPage() {
   const hasDiscount = discountPct > 0;
   const isFree = price === 0;
   const checkoutPrice = finalPrice ?? price;
+  const isLongDescription = description && description.length > 200;
 
   const activeImageSrc = imageUrls.length > 0 ? cloudinaryUrl(imageUrls[activeIndex]) : "";
 
@@ -233,9 +236,28 @@ export default function TemplateDetailPage() {
 
             {/* Description */}
             {description && (
-              <p className="text-sm leading-7 whitespace-pre-wrap" style={{ color: "var(--text2)" }}>
-                {description}
-              </p>
+              <div className="flex flex-col">
+                <div 
+                  className={`text-sm leading-7 whitespace-pre-wrap relative overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-[2000px]' : 'max-h-[160px]'} [&_p]:mb-2 [&_h2]:text-lg [&_h2]:font-bold [&_h2]:text-[var(--text1)] [&_h2]:mt-4 [&_h2]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-bold [&_em]:italic [&_a]:text-[#b91c1c] [&_a]:underline`} 
+                  style={{ color: "var(--text2)" }}
+                >
+                  <div dangerouslySetInnerHTML={{ __html: description }} />
+                  {!isExpanded && isLongDescription && (
+                    <div 
+                      className="absolute bottom-0 left-0 right-0 h-16" 
+                      style={{ background: "linear-gradient(to top, var(--bg) 0%, transparent 100%)" }}
+                    />
+                  )}
+                </div>
+                {isLongDescription && (
+                  <button 
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="self-start mt-2 text-sm font-semibold text-[#b91c1c] hover:underline cursor-pointer"
+                  >
+                    {isExpanded ? "Tutup kembali" : "Lihat semua"}
+                  </button>
+                )}
+              </div>
             )}
 
             {/* Buy button */}

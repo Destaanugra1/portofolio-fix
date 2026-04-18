@@ -6,10 +6,8 @@ import { useTheme } from "../ThemeContext";
 import { siteConfig } from "../../config/site";
 
 const navLinks = [
-  { label: "All Templates", href: "/templates" },
-  { label: "Portfolio", href: "/templates/portfolio" },
-  { label: "Landing Page", href: "/templates/landing" },
-  { label: "Dashboard", href: "/templates/dashboard" },
+  { label: "Home", href: "/" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export function TemplateNavbar() {
@@ -163,6 +161,27 @@ export function TemplateNavbar() {
               <ShoppingBag size={15} />
               Browse
             </Link>
+
+            {/* Admin link — visible only to admin, discreet */}
+            <a
+              href="/dashboard/settings/api-auth"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-7 h-7 rounded-full flex items-center justify-center"
+              style={{
+                fontSize: 10,
+                color: "var(--text2)",
+                opacity: 0.4,
+                textDecoration: "none",
+                border: "1px solid color-mix(in srgb, var(--text2) 20%, transparent)",
+                transition: "opacity 0.3s",
+              }}
+              title="API Auth Settings (Admin)"
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = "1")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = "0.4")}
+            >
+              ⚙
+            </a>
           </div>
 
           {/* Mobile */}

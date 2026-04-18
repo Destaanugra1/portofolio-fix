@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router";
 import { XCircle, ArrowLeft, RefreshCcw } from "lucide-react";
+import { apiFetch } from "../../lib/apiClient";
 
 export default function OrderErrorPage() {
   const [searchParams] = useSearchParams();
@@ -12,7 +13,7 @@ export default function OrderErrorPage() {
 
   useEffect(() => {
     if (orderId) {
-      fetch(`${API_URL}/store/orders/${orderId}`)
+      apiFetch(`${API_URL}/store/orders/${orderId}`)
         .then(res => res.json())
         .then(data => {
             if (data.success) setOrder(data.order);
