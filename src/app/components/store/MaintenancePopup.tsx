@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 
 type MaintenanceData = {
   id: number;
   type: 'maintenance';
   title: string;
   message: string | null;
+  showOnDev?: boolean;
 };
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
@@ -12,14 +14,23 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 export function MaintenancePopup() {
   const [popup, setPopup] = useState<MaintenanceData | null>(null);
   const [visible, setVisible] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchPopup = async () => {
       try {
-        const res = await fetch(`${API_URL}/store/popup`);
+        const res = await fetch(`${API_URL}/store/popup?path=${encodeURIComponent(location.pathname)}`);
         const data = await res.json();
         if (data.success && data.data?.maintenance) {
-          setPopup(data.data.maintenance);
+          const mData = data.data.maintenance;
+          
+          // Check for localhost / dev mode
+          const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+          if (isLocalhost && !mData.showOnDev) {
+            return; // skip showing
+          }
+
+          setPopup(mData);
           setTimeout(() => setVisible(true), 50);
         }
       } catch (err) {
@@ -27,7 +38,7 @@ export function MaintenancePopup() {
       }
     };
     fetchPopup();
-  }, []);
+  }, [location.pathname]);
 
   // Lock body scroll when maintenance is active
   useEffect(() => {
@@ -141,7 +152,7 @@ export function MaintenancePopup() {
         </div>
 
         <p className="text-xs mt-3" style={{ color: "rgba(255,255,255,0.3)" }}>
-          Mohon tunggu — kami sedang bekerja keras untuk Anda
+          <a className='text-blue-500' href="/">Kembali ke Home</a> | <a className='text-blue-500' href="/store">Toko kami</a>
         </p>
       </div>
 

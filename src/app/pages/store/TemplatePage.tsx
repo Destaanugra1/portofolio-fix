@@ -3,8 +3,6 @@ import { Banner } from '../../components/store/Banner';
 // import { FeaturedCard } from '../../components/store/FeaturedCard';
 import { TemplateCard } from '../../components/store/TemplateCard';
 import { useStoreGlobally } from '../../components/store/StoreContext';
-import { AdPopup } from '../../components/store/AdPopup';
-import { MaintenancePopup } from '../../components/store/MaintenancePopup';
 
 const TemplatePage = () => {
   const [activeCategory, setActiveCategory] = useState("Semua");
@@ -23,9 +21,6 @@ const TemplatePage = () => {
 
   return (
     <div className="min-h-screen pb-20" style={{ background: "var(--bg)", transition: "background 0.4s" }}>
-      {/* Popups — rendered at this level so they only appear on /template */}
-      <MaintenancePopup />
-      <AdPopup />
       <Banner
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}

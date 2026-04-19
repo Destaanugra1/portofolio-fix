@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { X, ExternalLink } from 'lucide-react';
+import { useLocation } from 'react-router';
 
 type AdPopupData = {
   id: number;
@@ -9,6 +10,7 @@ type AdPopupData = {
   imageUrl: string | null;
   buttonText: string | null;
   buttonUrl: string | null;
+  showOnDev?: boolean;
 };
 
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "";
@@ -25,6 +27,7 @@ export function AdPopup() {
   const [popup, setPopup] = useState<AdPopupData | null>(null);
   const [visible, setVisible] = useState(false);
   const [animating, setAnimating] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     // Don't show if already dismissed this session
@@ -32,10 +35,18 @@ export function AdPopup() {
 
     const fetchPopup = async () => {
       try {
-        const res = await fetch(`${API_URL}/store/popup`);
+        const res = await fetch(`${API_URL}/store/popup?path=${encodeURIComponent(location.pathname)}`);
         const data = await res.json();
         if (data.success && data.data?.ad) {
-          setPopup(data.data.ad);
+          const adData = data.data.ad;
+          
+          // Check for localhost / dev mode
+          const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+          if (isLocalhost && !adData.showOnDev) {
+            return; // skip showing
+          }
+
+          setPopup(adData);
           // Delay appearance by 1.5s
           setTimeout(() => {
             setAnimating(true);
@@ -48,7 +59,7 @@ export function AdPopup() {
     };
 
     fetchPopup();
-  }, []);
+  }, [location.pathname]);
 
   const handleClose = () => {
     setVisible(false);

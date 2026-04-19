@@ -9,11 +9,15 @@ import TemplatePage from "./pages/store/TemplatePage";
 import TemplateDetailPage from "../pages/store/TemplateDetailPage";
 import OrderStatusPage from "../pages/store/OrderStatusPage";
 import OrderErrorPage from "../pages/store/OrderErrorPage";
+import { AdPopup } from "./components/store/AdPopup";
+import { MaintenancePopup } from "./components/store/MaintenancePopup";
 
 export default function App() {
   return (
     <ThemeProvider>
       <StoreProvider>
+        <MaintenancePopup />
+        <AdPopup />
         <Routes>
 
         {/* ── Portfolio / Homepage ── */}
