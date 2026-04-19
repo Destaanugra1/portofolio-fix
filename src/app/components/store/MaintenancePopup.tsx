@@ -152,7 +152,7 @@ export function MaintenancePopup() {
         </div>
 
         <p className="text-xs mt-3" style={{ color: "rgba(255,255,255,0.3)" }}>
-          <a className='text-blue-500' href="/">Kembali ke Home</a> | <a className='text-blue-500' href="/store">Toko kami</a>
+          <a className='text-blue-500' href="/">Kembali ke Home</a> | <a className='text-blue-500' href="/template">Toko kami</a>
         </p>
       </div>
 

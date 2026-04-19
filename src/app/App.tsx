@@ -4,7 +4,8 @@ import { StoreProvider } from "./components/store/StoreContext";
 import { PortfolioLayout } from "./layouts/PortfolioLayout";
 import { TemplateLayout } from "./layouts/TemplateLayout";
 import { HomePage } from "./pages/HomePage";
-import { Inforasi } from "./pages/blog/Inforasi";
+import { BlogPage } from "./pages/blog/BlogPage";
+import { BlogDetailPage } from "./pages/blog/BlogDetailPage";
 import TemplatePage from "./pages/store/TemplatePage";
 import TemplateDetailPage from "../pages/store/TemplateDetailPage";
 import OrderStatusPage from "../pages/store/OrderStatusPage";
@@ -74,7 +75,15 @@ export default function App() {
           path="/blog"
           element={
             <TemplateLayout>
-              <Inforasi />
+              <BlogPage />
+            </TemplateLayout>
+          }
+        />
+        <Route
+          path="/blog/:slug"
+          element={
+            <TemplateLayout>
+              <BlogDetailPage />
             </TemplateLayout>
           }
         />

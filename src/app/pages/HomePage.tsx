@@ -39,7 +39,7 @@ export function HomePage() {
             transition: "color 0.4s",
           }}
         >
-          &copy; 2026 Alex Wallace. All rights reserved.
+          &copy; 2026 Desta. All rights reserved.
         </p>
       </footer>
     </div>
