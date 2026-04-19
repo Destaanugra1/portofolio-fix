@@ -5,6 +5,8 @@ import { CheckoutModal } from "../../app/components/store/CheckoutModal";
 import { apiFetch } from "../../lib/apiClient";
 import TemplatePage from "../../app/pages/store/TemplatePage";
 import RecommendedProducts from "../../app/components/cardRender/rekomendasi";
+import { AdPopup } from '../../app/components/store/AdPopup';
+import { MaintenancePopup } from '../../app/components/store/MaintenancePopup';
 
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "";
 
@@ -136,6 +138,8 @@ export default function TemplateDetailPage() {
 
   return (
     <div className="min-h-screen pb-24" style={{ background: "var(--bg)", transition: "background 0.4s" }}>
+      <MaintenancePopup />
+      <AdPopup />
       <div className="max-w-[960px] mx-auto px-4 pt-8">
         {/* Back */}
         <button
