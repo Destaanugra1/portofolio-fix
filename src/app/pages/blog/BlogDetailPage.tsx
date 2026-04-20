@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router';
 import { Clock, ArrowLeft, ChevronRight } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || '';
@@ -42,6 +43,10 @@ function imageUrl(url: string | null) {
 function formatDate(d: string | null) {
   if (!d) return '';
   return new Date(d).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function stripHtml(html: string) {
+  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
 export function BlogDetailPage() {
@@ -104,8 +109,27 @@ export function BlogDetailPage() {
     );
   }
 
+  const pageTitle = post.title ? `${post.title} | Desta Anugra Pratama` : 'Blog | Desta Anugra Pratama';
+  const pageDescription =
+    post.excerpt ?? (post.content ? stripHtml(post.content).slice(0, 160) : '');
+  const pageImage = post.coverImageUrl ? imageUrl(post.coverImageUrl) : '';
+  const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
+
   return (
     <div className="min-h-screen pb-20" style={{ background: 'var(--bg)', transition: 'background 0.4s' }}>
+      <Helmet>
+        <title>{pageTitle}</title>
+        {pageDescription && <meta name="description" content={pageDescription} />}
+        <meta property="og:title" content={post.title} />
+        {pageDescription && <meta property="og:description" content={pageDescription} />}
+        {pageImage && <meta property="og:image" content={pageImage} />}
+        {pageUrl && <meta property="og:url" content={pageUrl} />}
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content={pageImage ? 'summary_large_image' : 'summary'} />
+        <meta name="twitter:title" content={post.title} />
+        {pageDescription && <meta name="twitter:description" content={pageDescription} />}
+        {pageImage && <meta name="twitter:image" content={pageImage} />}
+      </Helmet>
       <div className="max-w-3xl mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs mb-6" style={{ color: 'var(--text2)' }}>
