@@ -43,7 +43,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, t
         try {
           const res = await apiFetch(`${API_URL}/store/orders/${orderId}/status`);
           const data = await res.json();
-          if (data.status === 'processing' || data.status === 'paid' || data.status === 'delivered' || data.status === 'success') {
+          if (data.status === 'processing' || data.status === 'success' || data.status === 'delivered') {
             clearInterval(interval);
             window.location.href = `/order/status?id=${orderId}`;
           } else if (data.status === 'canceled' || data.status === 'failed' || data.status === 'expired' || data.status === 'returned') {
@@ -219,7 +219,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, t
                   try {
                     const res = await apiFetch(`${API_URL}/store/orders/${orderId}/status`);
                     const data = await res.json();
-                    if (data.status === 'processing' || data.status === 'paid' || data.status === 'delivered' || data.status === 'success') {
+                    if (data.status === 'processing' || data.status === 'success' || data.status === 'delivered') {
                       window.location.href = `/order/status?id=${orderId}`;
                     } else if (data.status === 'canceled' || data.status === 'failed' || data.status === 'expired' || data.status === 'returned') {
                       window.location.href = `/order/error?id=${orderId}`;
